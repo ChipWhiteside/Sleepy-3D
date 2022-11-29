@@ -2,7 +2,7 @@
     "name": "PlayerInputActions",
     "maps": [
         {
-            "name": "Playing",
+            "name": "Player",
             "id": "e3b2a8ac-3233-427e-92d3-9f78f2669e18",
             "actions": [
                 {
@@ -11,7 +11,8 @@
                     "id": "a8699b73-65ff-4562-8204-018dd3fa7fb7",
                     "expectedControlType": "Vector2",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "",
+                    "initialStateCheck": false
                 },
                 {
                     "name": "Inventory",
@@ -19,7 +20,8 @@
                     "id": "9c79a365-922f-4470-8d4e-4c6c07a31e18",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "",
+                    "initialStateCheck": false
                 },
                 {
                     "name": "Use",
@@ -27,7 +29,8 @@
                     "id": "7fa320ec-2e6d-4359-a5ff-128fb1d81405",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "",
+                    "initialStateCheck": false
                 },
                 {
                     "name": "NumKeys",
@@ -35,7 +38,8 @@
                     "id": "59662a04-ce3d-43e8-8550-8b5ee13cdb81",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -107,6 +111,17 @@
                 },
                 {
                     "name": "",
+                    "id": "94334b8c-722d-4b46-ac98-fcf626827683",
+                    "path": "<Keyboard>/i",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Inventory",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "1f932bce-96e7-49f3-abec-06b9fa9718c3",
                     "path": "<Mouse>/leftButton",
                     "interactions": "Press",
@@ -119,7 +134,29 @@
                 {
                     "name": "",
                     "id": "ab6e002b-c40d-42a8-9b8d-3e0552e1d7ab",
-                    "path": "",
+                    "path": "<Keyboard>/1",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Mouse & Keyboard",
+                    "action": "NumKeys",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "3663b39d-c93a-472c-84bf-79df4c206e1e",
+                    "path": "<Keyboard>/2",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Mouse & Keyboard",
+                    "action": "NumKeys",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "bf790069-91cf-4f29-8d02-26a520519d38",
+                    "path": "<Keyboard>/3",
                     "interactions": "",
                     "processors": "",
                     "groups": "Mouse & Keyboard",
@@ -139,7 +176,8 @@
                     "id": "d23dc1a1-c163-41f3-96ee-7f6e24a4fd05",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [

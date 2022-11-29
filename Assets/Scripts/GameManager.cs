@@ -27,7 +27,7 @@ namespace Silence
         private bool spawnNightmares = false;
 
         private Sleepy sleepy;
-        private Player player;
+        private PlayerController playerController;
 
         private int nightmares;
         private float time;
@@ -50,7 +50,7 @@ namespace Silence
             GameEvents.instance.onGameOver += GameOver;
 
             sleepy = Sleepy.instance;
-            player = Player.instance;
+            playerController = PlayerController.instance;
             nightmares = 0;
             time = 0f;
             //score = 0;
@@ -108,8 +108,8 @@ namespace Silence
         {
             Debug.Log("Game Over");
             Debug.Log("Time survived: " + time);
-            Debug.Log("Nightmares Defeated: " + player.nightmareDefeated);
-            Debug.Log("Score: " + time * 20 + player.nightmareDefeated * 100);
+            Debug.Log("Nightmares Defeated: " + playerController.nightmareDefeated);
+            Debug.Log("Score: " + time * 20 + playerController.nightmareDefeated * 100);
         }
 
         public void InvSelectionChanged(int invIndex)

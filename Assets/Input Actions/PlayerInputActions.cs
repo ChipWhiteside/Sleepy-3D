@@ -24,7 +24,7 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
     ""name"": ""PlayerInputActions"",
     ""maps"": [
         {
-            ""name"": ""Playing"",
+            ""name"": ""Player"",
             ""id"": ""e3b2a8ac-3233-427e-92d3-9f78f2669e18"",
             ""actions"": [
                 {
@@ -133,6 +133,17 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
+                    ""id"": ""94334b8c-722d-4b46-ac98-fcf626827683"",
+                    ""path"": ""<Keyboard>/i"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Inventory"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
                     ""id"": ""1f932bce-96e7-49f3-abec-06b9fa9718c3"",
                     ""path"": ""<Mouse>/leftButton"",
                     ""interactions"": ""Press"",
@@ -145,7 +156,29 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""ab6e002b-c40d-42a8-9b8d-3e0552e1d7ab"",
-                    ""path"": """",
+                    ""path"": ""<Keyboard>/1"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Mouse & Keyboard"",
+                    ""action"": ""NumKeys"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""3663b39d-c93a-472c-84bf-79df4c206e1e"",
+                    ""path"": ""<Keyboard>/2"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Mouse & Keyboard"",
+                    ""action"": ""NumKeys"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""bf790069-91cf-4f29-8d02-26a520519d38"",
+                    ""path"": ""<Keyboard>/3"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Mouse & Keyboard"",
@@ -203,12 +236,12 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
         }
     ]
 }");
-        // Playing
-        m_Playing = asset.FindActionMap("Playing", throwIfNotFound: true);
-        m_Playing_Movement = m_Playing.FindAction("Movement", throwIfNotFound: true);
-        m_Playing_Inventory = m_Playing.FindAction("Inventory", throwIfNotFound: true);
-        m_Playing_Use = m_Playing.FindAction("Use", throwIfNotFound: true);
-        m_Playing_NumKeys = m_Playing.FindAction("NumKeys", throwIfNotFound: true);
+        // Player
+        m_Player = asset.FindActionMap("Player", throwIfNotFound: true);
+        m_Player_Movement = m_Player.FindAction("Movement", throwIfNotFound: true);
+        m_Player_Inventory = m_Player.FindAction("Inventory", throwIfNotFound: true);
+        m_Player_Use = m_Player.FindAction("Use", throwIfNotFound: true);
+        m_Player_NumKeys = m_Player.FindAction("NumKeys", throwIfNotFound: true);
         // Shop
         m_Shop = asset.FindActionMap("Shop", throwIfNotFound: true);
         m_Shop_Newaction = m_Shop.FindAction("New action", throwIfNotFound: true);
@@ -268,44 +301,44 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
         return asset.FindBinding(bindingMask, out action);
     }
 
-    // Playing
-    private readonly InputActionMap m_Playing;
-    private IPlayingActions m_PlayingActionsCallbackInterface;
-    private readonly InputAction m_Playing_Movement;
-    private readonly InputAction m_Playing_Inventory;
-    private readonly InputAction m_Playing_Use;
-    private readonly InputAction m_Playing_NumKeys;
-    public struct PlayingActions
+    // Player
+    private readonly InputActionMap m_Player;
+    private IPlayerActions m_PlayerActionsCallbackInterface;
+    private readonly InputAction m_Player_Movement;
+    private readonly InputAction m_Player_Inventory;
+    private readonly InputAction m_Player_Use;
+    private readonly InputAction m_Player_NumKeys;
+    public struct PlayerActions
     {
         private @PlayerInputActions m_Wrapper;
-        public PlayingActions(@PlayerInputActions wrapper) { m_Wrapper = wrapper; }
-        public InputAction @Movement => m_Wrapper.m_Playing_Movement;
-        public InputAction @Inventory => m_Wrapper.m_Playing_Inventory;
-        public InputAction @Use => m_Wrapper.m_Playing_Use;
-        public InputAction @NumKeys => m_Wrapper.m_Playing_NumKeys;
-        public InputActionMap Get() { return m_Wrapper.m_Playing; }
+        public PlayerActions(@PlayerInputActions wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Movement => m_Wrapper.m_Player_Movement;
+        public InputAction @Inventory => m_Wrapper.m_Player_Inventory;
+        public InputAction @Use => m_Wrapper.m_Player_Use;
+        public InputAction @NumKeys => m_Wrapper.m_Player_NumKeys;
+        public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
         public bool enabled => Get().enabled;
-        public static implicit operator InputActionMap(PlayingActions set) { return set.Get(); }
-        public void SetCallbacks(IPlayingActions instance)
+        public static implicit operator InputActionMap(PlayerActions set) { return set.Get(); }
+        public void SetCallbacks(IPlayerActions instance)
         {
-            if (m_Wrapper.m_PlayingActionsCallbackInterface != null)
+            if (m_Wrapper.m_PlayerActionsCallbackInterface != null)
             {
-                @Movement.started -= m_Wrapper.m_PlayingActionsCallbackInterface.OnMovement;
-                @Movement.performed -= m_Wrapper.m_PlayingActionsCallbackInterface.OnMovement;
-                @Movement.canceled -= m_Wrapper.m_PlayingActionsCallbackInterface.OnMovement;
-                @Inventory.started -= m_Wrapper.m_PlayingActionsCallbackInterface.OnInventory;
-                @Inventory.performed -= m_Wrapper.m_PlayingActionsCallbackInterface.OnInventory;
-                @Inventory.canceled -= m_Wrapper.m_PlayingActionsCallbackInterface.OnInventory;
-                @Use.started -= m_Wrapper.m_PlayingActionsCallbackInterface.OnUse;
-                @Use.performed -= m_Wrapper.m_PlayingActionsCallbackInterface.OnUse;
-                @Use.canceled -= m_Wrapper.m_PlayingActionsCallbackInterface.OnUse;
-                @NumKeys.started -= m_Wrapper.m_PlayingActionsCallbackInterface.OnNumKeys;
-                @NumKeys.performed -= m_Wrapper.m_PlayingActionsCallbackInterface.OnNumKeys;
-                @NumKeys.canceled -= m_Wrapper.m_PlayingActionsCallbackInterface.OnNumKeys;
+                @Movement.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMovement;
+                @Movement.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMovement;
+                @Movement.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMovement;
+                @Inventory.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInventory;
+                @Inventory.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInventory;
+                @Inventory.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInventory;
+                @Use.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnUse;
+                @Use.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnUse;
+                @Use.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnUse;
+                @NumKeys.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnNumKeys;
+                @NumKeys.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnNumKeys;
+                @NumKeys.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnNumKeys;
             }
-            m_Wrapper.m_PlayingActionsCallbackInterface = instance;
+            m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
             {
                 @Movement.started += instance.OnMovement;
@@ -323,7 +356,7 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
             }
         }
     }
-    public PlayingActions @Playing => new PlayingActions(this);
+    public PlayerActions @Player => new PlayerActions(this);
 
     // Shop
     private readonly InputActionMap m_Shop;
@@ -366,7 +399,7 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
             return asset.controlSchemes[m_MouseKeyboardSchemeIndex];
         }
     }
-    public interface IPlayingActions
+    public interface IPlayerActions
     {
         void OnMovement(InputAction.CallbackContext context);
         void OnInventory(InputAction.CallbackContext context);
