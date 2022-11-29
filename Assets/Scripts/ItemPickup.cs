@@ -26,14 +26,14 @@ namespace Silence
             cc.radius = .7f;
         }
 
-        private void OnTriggerEnter2D(Collider2D collision)
-        {
-            if (collision.name == "Player")
-            {
-                GameManager.instance.inventory.Add(item);
-                GameEvents.instance.UpdateInv();
-                Destroy(this.gameObject);
-            }
-        }
+        //private void OnTriggerEnter2D(Collider2D collision)
+        //{
+        //    if (collision.name == "Player")
+        //    {
+        //        GameManager.instance.inventory.Add(item);
+        //        GameEvents.instance.UpdateInv();
+        //        Destroy(this.gameObject);
+        //    }
+        //}
     }
 }

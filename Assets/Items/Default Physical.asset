@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Default Physical
   iclass: 0
-  icon: {fileID: 21300000, guid: 2766c6eb78f3744a5bfaef9704b01796, type: 3}
+  icon: {fileID: 21300000, guid: e97055bad8f22d9479e370eeb641d129, type: 3}

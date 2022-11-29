@@ -17,5 +17,5 @@ namespace Silence
         }
     }
 
-    public enum ItemClass { Physical, Spiritual, Pyro }
+    public enum ItemClass { Physical, Ghost, Demonic }
 }

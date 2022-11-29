@@ -6,13 +6,14 @@ using UnityEngine;
 
 namespace Silence
 {
-    public enum NightmareClass { Physical, Spiritual, Pyro }
+    public enum NightmareClass { Physical, Demonic, Pyro }
 
 
     public class Nightmare : MonoBehaviour
     {
         public Transform Sleepy;
         public NightmareClass nightmareClass = NightmareClass.Physical;
+        public Transform ChildSprite;
 
         // Eventually change this to a queue or stack of nightmareClasses so Json can be wearing a ghost sheet (thus is a ghost class THEN a physical class)
 
@@ -24,17 +25,10 @@ namespace Silence
         private float damage = 1.0f; // Damage starts at a base and increases based on time
 
         private Animator childAnimator;
+        private bool facingRight = true;  // For determining which way the player is currently facing.
 
         private int vertical;
         private int horizontal;
-
-        //private Rigidbody rigidbody;
-
-
-        //private void Start()
-        //{
-        //    rigidbody = GetComponent<Rigidbody>();
-        //}
 
         public void Instantiate(Transform sleepy, AnimatorController aController, NightmareClass nClass, float gameTime)
         {
@@ -96,15 +90,22 @@ namespace Silence
         private void TrackSleepy(float delta)
         {
             Vector3 targetPosition = Vector3.MoveTowards(transform.position, Sleepy.position, speed * delta);
-            Vector3 direction = targetPosition - transform.position;
-            Debug.Log("direction: " + direction);
+            Vector3 direction = Sleepy.position - transform.position;
 
             transform.position = targetPosition;
-            UpdateAnimatorValues(Mathf.Clamp01(100 * direction.y), Mathf.Clamp01(100 * direction.x));
+            UpdateAnimatorValues(direction.y, direction.x);
+
+            // If nightmare moves left and is facing right OR moves right and is facing left, flip
+            if ((direction.x < 0 && facingRight) || (direction.x > 0 && !facingRight))
+            {
+                Flip();
+            }
         }
 
-        private void OnTriggerEnter2D(Collider2D collision)
+        private void OnTriggerEnter(Collider collision)
         {
+            Debug.Log("Hit collider:" + collision.name + " (Tag: "+ collision.tag+")");
+
             if (collision.tag == "Sleepy")
             {
                 Debug.Log(name + " hit Sleepy");
@@ -112,6 +113,17 @@ namespace Silence
 
                 GameObject.Destroy(gameObject);
             }
+        }
+
+        private void Flip()
+        {
+            // Switch the way the player is labelled as facing.
+            facingRight = !facingRight;
+
+            // Multiply the player's x local scale by -1.
+            Vector3 theScale = ChildSprite.localScale;
+            theScale.x *= -1;
+            ChildSprite.localScale = theScale;
         }
 
         public void HauntSleepy()

@@ -10,7 +10,7 @@ namespace Silence
         public static Sleepy instance;
 
         public int fear;        // How many nightmares have entered Sleepy's dream
-        public int maxFear;
+        public int maxFear = 10;
 
         [SerializeField]
         [Range(0f, 50f)] float moveSpeed = 0.25f;
@@ -28,6 +28,8 @@ namespace Silence
                 Debug.Log("More than one instance of sleepy");
             }
             instance = this;
+
+            maxFear = 10;
         }
 
         void FixedUpdate()

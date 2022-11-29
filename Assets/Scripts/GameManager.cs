@@ -17,10 +17,10 @@ namespace Silence
 
         //public Item defaultPhysical;
         //public Item defaultPyro;
-        //public Item defaultSpiritual;
+        //public Item defaultDemonic;
 
-        public List<Item> inventory = new List<Item>();
-        public Item selectedItem;
+        //public List<Item> inventory = new List<Item>();
+        //public Item selectedItem;
         public int zIterationsBack;
 
         [SerializeField]
@@ -60,10 +60,10 @@ namespace Silence
 
             //inventory.Add(defaultPhysical);
             //inventory.Add(defaultPyro);
-            //inventory.Add(defaultSpiritual);
+            //inventory.Add(defaultDemonic);
             GameEvents.instance.UpdateInv();
 
-            selectedItem = inventory[2];
+            //selectedItem = inventory[2];
 
             while (spawnNightmares)
             {
@@ -112,10 +112,6 @@ namespace Silence
             Debug.Log("Score: " + time * 20 + playerController.nightmareDefeated * 100);
         }
 
-        public void InvSelectionChanged(int invIndex)
-        {
-            if (invIndex < inventory.Count)
-                selectedItem = inventory[invIndex];
-        }
+        
     }
 }

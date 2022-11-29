@@ -62,6 +62,24 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""InventoryLeft"",
+                    ""type"": ""Button"",
+                    ""id"": ""03f643bc-52b6-448c-a671-3f056e681c26"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""InventoryRight"",
+                    ""type"": ""Button"",
+                    ""id"": ""14f8eb14-aba7-4910-b966-4ec3a2c82947"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -185,6 +203,28 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                     ""action"": ""NumKeys"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""7c3f884c-4fb4-4121-9c0a-07634c537d99"",
+                    ""path"": ""<Keyboard>/q"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Mouse & Keyboard"",
+                    ""action"": ""InventoryLeft"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""1375dfc0-b094-45f1-9ec9-6777de6bb4ff"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Mouse & Keyboard"",
+                    ""action"": ""InventoryRight"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -242,6 +282,8 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
         m_Player_Inventory = m_Player.FindAction("Inventory", throwIfNotFound: true);
         m_Player_Use = m_Player.FindAction("Use", throwIfNotFound: true);
         m_Player_NumKeys = m_Player.FindAction("NumKeys", throwIfNotFound: true);
+        m_Player_InventoryLeft = m_Player.FindAction("InventoryLeft", throwIfNotFound: true);
+        m_Player_InventoryRight = m_Player.FindAction("InventoryRight", throwIfNotFound: true);
         // Shop
         m_Shop = asset.FindActionMap("Shop", throwIfNotFound: true);
         m_Shop_Newaction = m_Shop.FindAction("New action", throwIfNotFound: true);
@@ -308,6 +350,8 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Inventory;
     private readonly InputAction m_Player_Use;
     private readonly InputAction m_Player_NumKeys;
+    private readonly InputAction m_Player_InventoryLeft;
+    private readonly InputAction m_Player_InventoryRight;
     public struct PlayerActions
     {
         private @PlayerInputActions m_Wrapper;
@@ -316,6 +360,8 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
         public InputAction @Inventory => m_Wrapper.m_Player_Inventory;
         public InputAction @Use => m_Wrapper.m_Player_Use;
         public InputAction @NumKeys => m_Wrapper.m_Player_NumKeys;
+        public InputAction @InventoryLeft => m_Wrapper.m_Player_InventoryLeft;
+        public InputAction @InventoryRight => m_Wrapper.m_Player_InventoryRight;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -337,6 +383,12 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                 @NumKeys.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnNumKeys;
                 @NumKeys.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnNumKeys;
                 @NumKeys.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnNumKeys;
+                @InventoryLeft.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInventoryLeft;
+                @InventoryLeft.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInventoryLeft;
+                @InventoryLeft.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInventoryLeft;
+                @InventoryRight.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInventoryRight;
+                @InventoryRight.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInventoryRight;
+                @InventoryRight.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInventoryRight;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -353,6 +405,12 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                 @NumKeys.started += instance.OnNumKeys;
                 @NumKeys.performed += instance.OnNumKeys;
                 @NumKeys.canceled += instance.OnNumKeys;
+                @InventoryLeft.started += instance.OnInventoryLeft;
+                @InventoryLeft.performed += instance.OnInventoryLeft;
+                @InventoryLeft.canceled += instance.OnInventoryLeft;
+                @InventoryRight.started += instance.OnInventoryRight;
+                @InventoryRight.performed += instance.OnInventoryRight;
+                @InventoryRight.canceled += instance.OnInventoryRight;
             }
         }
     }
@@ -405,6 +463,8 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
         void OnInventory(InputAction.CallbackContext context);
         void OnUse(InputAction.CallbackContext context);
         void OnNumKeys(InputAction.CallbackContext context);
+        void OnInventoryLeft(InputAction.CallbackContext context);
+        void OnInventoryRight(InputAction.CallbackContext context);
     }
     public interface IShopActions
     {

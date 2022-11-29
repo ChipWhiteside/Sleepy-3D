@@ -24,6 +24,10 @@ namespace Silence {
         private float inventory_Input;
         [SerializeField]
         private float numKey_Input;
+        [SerializeField]
+        private float q_Input;
+        [SerializeField]
+        private float e_Input;
 
         private void Start()
         {
@@ -44,6 +48,9 @@ namespace Silence {
                 inputActions.Player.Use.performed += i => use_Input = i.ReadValue<float>();
                 inputActions.Player.Inventory.performed += i => inventory_Input = i.ReadValue<float>();
                 inputActions.Player.NumKeys.performed += i => numKey_Input = i.ReadValue<float>();
+                
+                inputActions.Player.InventoryLeft.performed += i => q_Input = i.ReadValue<float>();
+                inputActions.Player.InventoryRight.performed += i => e_Input = i.ReadValue<float>();
             }
 
             inputActions.Enable();
@@ -69,6 +76,8 @@ namespace Silence {
             use_Input = 0;
             inventory_Input = 0;
             numKey_Input = 0;
+            q_Input = 0;
+            e_Input = 0;
         }
 
         private void MoveInput(float delta)
@@ -97,6 +106,14 @@ namespace Silence {
             if (inventory_Input > 0)
             {
                 playerController.InventoryPressed();
+            }
+            if (q_Input > 0)
+            {
+                PlayerInventory.instance.ToggleLeft();
+            }
+            if (e_Input > 0)
+            {
+                PlayerInventory.instance.ToggleRight();
             }
         }
 

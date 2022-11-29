@@ -30,5 +30,5 @@ namespace Silence
         }
     }
 
-    //public enum NightmareClass { Physical, Spiritual, Pyro }
+    //public enum NightmareClass { Physical, Demonic, Pyro }
 }
