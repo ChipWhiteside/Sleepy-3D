@@ -34,15 +34,17 @@ namespace Silence
         {
             float delta = Time.time;
 
-            Debug.Log("time: " + delta);
-
             //moveSpeed += delta / 10000; // First pass at increasing sleepy's speed over time
 
             float changeInX = transform.position.x + (moveSpeed * Time.deltaTime);
             float changeInY = Mathf.Sin(delta * frequency) * amplitude;
 
             transform.position = new Vector3(changeInX, changeInY, 0);
+        }
 
+        public void Haunt(float damage)
+        {
+            fear += (int)damage;
             if (fear >= maxFear)
             {
                 GameEvents.instance.GameOver();

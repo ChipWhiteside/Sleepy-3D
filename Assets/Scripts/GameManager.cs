@@ -100,7 +100,7 @@ namespace Silence
             //Debug.Log("nightmareIndex: " + nightmareIndex);
 
             GameObject d = GameObject.Instantiate(nightmarePrefabs[nightmareIndex], new Vector3(nightmareXSpawn, nightmareYSpawn, 0), new Quaternion(0, 0, 0, 0));
-            d.GetComponent<Nightmare>().sleepy = sleepy.transform;
+            d.GetComponent<Nightmare>().Sleepy = sleepy.transform;
             //d.GetComponent<Nightmare>().nightmareObj = demonObj;
         }
 

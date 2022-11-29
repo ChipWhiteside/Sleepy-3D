@@ -114,10 +114,11 @@ namespace Silence
             if (nightmaresClose.Contains(nightmare))
             {
                 Debug.Log("Nightmare close clicked");
-                if (((int)nightmare.GetComponent<Nightmare>().nightmareObj.nclass).Equals((int)GameManager.instance.selectedItem.iclass))
+                Nightmare nightmareScript = nightmare.GetComponent<Nightmare>();
+                if (((int)nightmareScript.nightmareClass).Equals((int)GameManager.instance.selectedItem.iclass))
                 {
                     Debug.Log("Item matches nightmare type");
-                    GameObject.Destroy(nightmare);
+                    nightmareScript.Hit();
                     nightmareDefeated++;
                 }
                 else

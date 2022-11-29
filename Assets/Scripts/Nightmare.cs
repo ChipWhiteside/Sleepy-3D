@@ -1,51 +1,139 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
+using UnityEditor.Animations;
 using UnityEngine;
 
 namespace Silence
 {
-    [RequireComponent(typeof(SpriteRenderer))]
-    [RequireComponent(typeof(Animator))]
+    public enum NightmareClass { Physical, Spiritual, Pyro }
+
+
     public class Nightmare : MonoBehaviour
     {
-        public NightmareObject nightmareObj;
-        public Transform sleepy;
-        public float speed;
+        public Transform Sleepy;
+        public NightmareClass nightmareClass = NightmareClass.Physical;
 
-        private SpriteRenderer sr;
-        private Animator anim;
+        // Eventually change this to a queue or stack of nightmareClasses so Json can be wearing a ghost sheet (thus is a ghost class THEN a physical class)
 
-        void Start()
+        [SerializeField]
+        private float health = 1.0f; // Health starts at a base and increases based on time
+        [SerializeField]
+        private float speed = 1.0f; // Speed starts at a base and increases based on time
+        [SerializeField]
+        private float damage = 1.0f; // Damage starts at a base and increases based on time
+
+        private Animator childAnimator;
+
+        private int vertical;
+        private int horizontal;
+
+        //private Rigidbody rigidbody;
+
+
+        //private void Start()
+        //{
+        //    rigidbody = GetComponent<Rigidbody>();
+        //}
+
+        public void Instantiate(Transform sleepy, AnimatorController aController, NightmareClass nClass, float gameTime)
         {
-            sr = GetComponent<SpriteRenderer>();
-            anim = GetComponent<Animator>();
-
-            sr.sprite = nightmareObj.icon;
-            //anim.animation = nightmareObj.anim;
+            // gameTime increases the health and speed of nightmares. Potentially even the damage.
+            Sleepy = sleepy;
+            childAnimator = GetComponentInChildren<Animator>();
+            childAnimator.runtimeAnimatorController = aController;
+            nightmareClass = nClass;
+            health = 1.0f;
+            speed = 1.0f;
+            damage = 1.0f;
         }
 
-        void Update()
+        private void Awake()
         {
-            if (Vector2.Distance(transform.position, sleepy.transform.position) > 7.5)
-                transform.position = Vector3.MoveTowards(transform.position, sleepy.position, (speed * 2.5f) * Time.deltaTime);
-            else
-                transform.position = Vector3.MoveTowards(transform.position, sleepy.position, speed * Time.deltaTime);
+            childAnimator = GetComponentInChildren<Animator>();
+            vertical = Animator.StringToHash("Vertical");
+            horizontal = Animator.StringToHash("Horizontal");
         }
 
-        void SpeedIncrease()
+        public void UpdateAnimatorValues(float verticalMovement, float horizontalMovement)
         {
-            speed += .1f;
+            #region Vertical
+            float v = 0;
+
+            if (verticalMovement > 0)
+            {
+                v = 1.0f;
+            }
+            else if (verticalMovement < 0)
+            {
+                v = -1.0f;
+            }
+            #endregion
+
+            #region Horizontal
+            float h = 0;
+
+            if (horizontalMovement > 0)
+            {
+                h = 1.0f;
+            }
+            else if (horizontalMovement < 0)
+            {
+                h = -1.0f;
+            }
+            #endregion
+
+            childAnimator.SetFloat(vertical, v, 0.1f, Time.deltaTime);
+            childAnimator.SetFloat(horizontal, h, 0.1f, Time.deltaTime);
+        }
+
+        private void FixedUpdate()
+        {
+            float delta = Time.fixedDeltaTime;
+            TrackSleepy(delta);
+        }
+
+        private void TrackSleepy(float delta)
+        {
+            Vector3 targetPosition = Vector3.MoveTowards(transform.position, Sleepy.position, speed * delta);
+            Vector3 direction = targetPosition - transform.position;
+            Debug.Log("direction: " + direction);
+
+            transform.position = targetPosition;
+            UpdateAnimatorValues(Mathf.Clamp01(100 * direction.y), Mathf.Clamp01(100 * direction.x));
         }
 
         private void OnTriggerEnter2D(Collider2D collision)
         {
             if (collision.tag == "Sleepy")
             {
-                Debug.Log("Nightmare in sleepy's dream");
-                nightmareObj.HauntSleepy();
-                Sleepy.instance.fear++;
+                Debug.Log(name + " hit Sleepy");
+                HauntSleepy();
+
                 GameObject.Destroy(gameObject);
             }
         }
+
+        public void HauntSleepy()
+        {
+            Sleepy sleepyScript = Sleepy.GetComponent<Sleepy>();
+            sleepyScript.Haunt(damage);
+        }
+
+        public void Hit()
+        {
+            GameObject.Destroy(gameObject);
+        }
+
+        public void AttackPlayer()
+        {
+
+        }
+
+        public void AttackSleepy()
+        {
+            // Player sucking in animation
+        }
+
     }
 }

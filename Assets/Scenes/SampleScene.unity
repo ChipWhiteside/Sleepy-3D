@@ -853,8 +853,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 291430766}
+  - component: {fileID: 291430767}
+  - component: {fileID: 291430770}
   m_Layer: 0
-  m_Name: Json Nightmare
+  m_Name: Json
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -868,7 +870,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 291430765}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 3, z: 0}
+  m_LocalPosition: {x: -3, y: 3, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -876,6 +878,36 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &291430767
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 291430765}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 14c09c9e8d974e749b18221c4266eb86, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Sleepy: {fileID: 546178484}
+  nightmareClass: 0
+  health: 1
+  speed: 1
+  damage: 1
+--- !u!65 &291430770
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 291430765}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1.5, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &304529201
 GameObject:
   m_ObjectHideFlags: 0
@@ -1489,8 +1521,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8cac60ba936024962a1f106398a2c37c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 15
+  moveSpeed: 10
   nightmareDefeated: 0
+--- !u!65 &367341478
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 367341469}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.5, y: 1.75, z: 1}
+  m_Center: {x: 0, y: -0.1, z: 0}
 --- !u!1 &386431741
 GameObject:
   m_ObjectHideFlags: 0
@@ -1927,9 +1972,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 546178484}
+  - component: {fileID: 546178486}
+  - component: {fileID: 546178485}
   m_Layer: 0
   m_Name: Sleepy
-  m_TagString: Untagged
+  m_TagString: Sleepy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1950,6 +1997,37 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &546178485
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 546178483}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 3, y: 1.5, z: 1}
+  m_Center: {x: 0, y: 0.15, z: 0}
+--- !u!114 &546178486
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 546178483}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 147865e98285f4dc2bcf19e0adf81822, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fear: 0
+  maxFear: 0
+  moveSpeed: 0.25
+  spawnRadius: 15
+  amplitude: 0.25
+  frequency: 0.75
 --- !u!114 &624669358 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 786450432816727086, guid: b94a0ca73ff705c4c90332c5a9eae234,
