@@ -4,6 +4,8 @@ using UnityEngine;
 
 namespace Silence
 {
+    public enum NightmareClass { Physical, Demonic, Ghost }
+
     public class GameManager : MonoBehaviour
     {
         public static GameManager instance;

@@ -6,14 +6,13 @@ using UnityEngine;
 
 namespace Silence
 {
-    public enum NightmareClass { Physical, Demonic, Pyro }
-
-
     public class Nightmare : MonoBehaviour
     {
         public Transform Sleepy;
-        public NightmareClass nightmareClass = NightmareClass.Physical;
+        public NightmareClass nightmareClass;
         public Transform ChildSprite;
+
+        public NightmareObject nightmareObj;
 
         // Eventually change this to a queue or stack of nightmareClasses so Json can be wearing a ghost sheet (thus is a ghost class THEN a physical class)
 
@@ -24,27 +23,37 @@ namespace Silence
         [SerializeField]
         private float damage = 1.0f; // Damage starts at a base and increases based on time
 
+        [HideInInspector]
+        public float _Health { get { return health; } set { health = value; } }
+        [HideInInspector]
+        public float _Speed { get { return speed; } set { speed = value; } }
+        [HideInInspector]
+        public float _Damage { get { return damage; } set { damage = value; } }
+
         private Animator childAnimator;
-        private bool facingRight = true;  // For determining which way the player is currently facing.
+        public bool facingRight = true;  // For determining which way the player is currently facing.
 
         private int vertical;
         private int horizontal;
 
-        public void Instantiate(Transform sleepy, AnimatorController aController, NightmareClass nClass, float gameTime)
+        private void OnEnable()
+        {
+            SetupNightmareFromObj();
+        }
+
+        public void SetupNightmareFromObj()
         {
             // gameTime increases the health and speed of nightmares. Potentially even the damage.
-            Sleepy = sleepy;
             childAnimator = GetComponentInChildren<Animator>();
-            childAnimator.runtimeAnimatorController = aController;
-            nightmareClass = nClass;
-            health = 1.0f;
-            speed = 1.0f;
-            damage = 1.0f;
+            childAnimator.runtimeAnimatorController = nightmareObj.animController;
+            nightmareClass = nightmareObj.nclass;
+            health = nightmareObj.health;
+            speed = nightmareObj.speed;
+            damage = nightmareObj.damage;
         }
 
         private void Awake()
         {
-            childAnimator = GetComponentInChildren<Animator>();
             vertical = Animator.StringToHash("Vertical");
             horizontal = Animator.StringToHash("Horizontal");
         }
@@ -84,7 +93,8 @@ namespace Silence
         private void FixedUpdate()
         {
             float delta = Time.fixedDeltaTime;
-            TrackSleepy(delta);
+            nightmareObj.enemyBrain.Think(this);
+            //TrackSleepy(delta);
         }
 
         private void TrackSleepy(float delta)
@@ -115,7 +125,7 @@ namespace Silence
             }
         }
 
-        private void Flip()
+        public void Flip()
         {
             // Switch the way the player is labelled as facing.
             facingRight = !facingRight;

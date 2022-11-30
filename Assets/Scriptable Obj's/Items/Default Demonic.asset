@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Default Demonic
   m_EditorClassIdentifier: 
   name: Default Demonic
-  iclass: 2
+  nightmareClass: 1
   icon: {fileID: 21300000, guid: 77e49ab48c1b95e4e838b77c23ee3fd8, type: 3}

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Silence
 {
@@ -11,6 +12,10 @@ namespace Silence
 
         public List<Item> allItems = new List<Item>();
         public Item[] inventory = new Item[3];
+        public Item[][] inv = new Item[3][];
+
+        public Button LeftArrow;
+        public Button RightArrow;
 
         public ItemSlot GhostItem;
         public ItemSlot PhysicalItem;
@@ -45,6 +50,7 @@ namespace Silence
 
         public void SelectItem(ItemSlot itemSlot)
         {
+            Debug.LogFormat("Selected ({0}) slot with item type ({1})", itemSlot.name, itemSlot.item.nightmareClass);
             selectedItemSlot = itemSlot;
             selectedItemSlot.Select();
             //GameEvents.instance.UpdateInv();

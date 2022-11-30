@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Default Ghost
   m_EditorClassIdentifier: 
   name: Default Ghost
-  iclass: 1
+  nightmareClass: 2
   icon: {fileID: 21300000, guid: ed490c78dcaa5c04085c8e46086ae51e, type: 3}

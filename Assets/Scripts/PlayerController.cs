@@ -68,27 +68,44 @@ namespace Silence
         {
             Debug.Log("Used " + PlayerInventory.instance.selectedItem.name);
 
-            //RaycastHit[] hits;
-            //Vector3 mousePos = Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue());
-            //hits = Physics.RaycastAll(mousePos, -transform.up, 100.0f);
-
-            //foreach (RaycastHit hit in hits)
-            //{
-            //    Debug.Log("Clicked object: " + hit.collider.gameObject.name);
-            //    if (hit.collider.gameObject.tag == "Nightmare")
-            //    {
-            //        NightmareClicked(hit.collider.gameObject);
-            //    }
-            //}
-
 
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            RaycastHit hit;
-            if (Physics.Raycast(ray, out hit, 100))
+            RaycastHit[] hits;
+            hits = Physics.RaycastAll(ray);
+            foreach (RaycastHit hit in hits)
             {
-                Debug.Log(hit.transform.name);
-                Debug.Log("hit");
+                Debug.Log("Clicked object: " + hit.collider.gameObject.name);
+                if (hit.collider.gameObject.tag == "Nightmare")
+                {
+                    NightmareClicked(hit.collider.gameObject);
+                }
             }
+
+
+
+            //RaycastHit[] hits;
+            //        Vector3 mousePos = Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue());
+            //        hits = Physics.RaycastAll(mousePos, -transform.up, 100.0f);
+
+
+            //        Debug.Log("Hits: " + hits + " ("+hits.Length+")");
+            //        //foreach (RaycastHit hit in hits)
+            //        //{
+            //        //    Debug.Log("Clicked object: " + hit.collider.gameObject.name);
+            //        //    if (hit.collider.gameObject.tag == "Nightmare")
+            //        //    {
+            //        //        NightmareClicked(hit.collider.gameObject);
+            //        //    }
+            //        //}
+
+
+            //        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            //        RaycastHit hit;
+            //        if (Physics.Raycast(ray, out hit, 100))
+            //        {
+            //            Debug.Log(hit.transform.name);
+            //            Debug.Log("hit");
+            //        }
         }
 
         void OnEnable()
@@ -103,7 +120,7 @@ namespace Silence
 
         private void OnTriggerEnter(Collider collision)
         {
-            Debug.Log("Nightmare in trigger");
+            //Debug.Log("Nightmare in trigger");
             if (collision.tag == "Nightmare")
             {
                 nightmaresClose.Add(collision.gameObject);
@@ -112,7 +129,7 @@ namespace Silence
 
         private void OnTriggerExit(Collider collision)
         {
-            Debug.Log("Nightmare out of trigger");
+            //Debug.Log("Nightmare out of trigger");
             if (collision.tag == "Nightmare")
             {
                 nightmaresClose.Remove(collision.gameObject);
@@ -123,9 +140,10 @@ namespace Silence
         {
             if (nightmaresClose.Contains(nightmare))
             {
-                Debug.Log("Nightmare close clicked");
                 Nightmare nightmareScript = nightmare.GetComponent<Nightmare>();
-                if (((int)nightmareScript.nightmareClass).Equals((int)PlayerInventory.instance.selectedItem.iclass))
+                Debug.LogFormat("Nightmare of type ({0}) clicked with weapon type ({1})", nightmareScript.nightmareClass.ToString(), PlayerInventory.instance.selectedItem.nightmareClass.ToString());
+
+                if ((nightmareScript.nightmareClass).Equals(PlayerInventory.instance.selectedItem.nightmareClass))
                 {
                     Debug.Log("Item matches nightmare type");
                     nightmareScript.Hit();

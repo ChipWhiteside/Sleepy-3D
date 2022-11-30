@@ -39,13 +39,13 @@ namespace Silence
 
         private void OnTriggerEnter2D(Collider2D collision)
         {
-            if (collision.tag == "Sleepy")
-            {
-                Debug.Log("Nightmare in sleepy's dream");
-                nightmareObj.HauntSleepy();
-                Sleepy.instance.fear++;
-                GameObject.Destroy(gameObject);
-            }
+            //if (collision.tag == "Sleepy")
+            //{
+            //    Debug.Log("Nightmare in sleepy's dream");
+            //    nightmareObj.HauntSleepy();
+            //    Sleepy.instance.fear++;
+            //    GameObject.Destroy(gameObject);
+            //}
         }
     }
 }

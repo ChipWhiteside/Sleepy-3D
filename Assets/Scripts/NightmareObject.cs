@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using UnityEditor.Animations;
+using UnityEngine;
 
 namespace Silence
 {
@@ -6,28 +7,35 @@ namespace Silence
     public class NightmareObject : ScriptableObject
     {
         new public string name = "New Item";
-        public NightmareClass nclass;
+
         public Sprite icon = null;
-        public Animation anim = null;
+        public AnimatorController animController = null;
+        public EnemyBrain enemyBrain;
+        
+        public NightmareClass nclass;
 
-        public void HauntSleepy()
-        {
-            Debug.Log(nclass + " nightmare haunted Sleepy");
+        public float health = 1;
+        public float speed = 2;
+        public float damage = 1;
 
-            //player hauting animation
-        }
+        //public void HauntSleepy()
+        //{
+        //    Debug.Log(nclass + " nightmare haunted Sleepy");
 
-        public bool PlayerClickedMe(ItemClass iclass)
-        {
-            if (((int)iclass).Equals((int)nclass))
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-        }
+        //    //player hauting animation
+        //}
+
+        //public bool PlayerClickedMe(ItemClass iclass)
+        //{
+        //    if (((int)iclass).Equals((int)nclass))
+        //    {
+        //        return true;
+        //    }
+        //    else
+        //    {
+        //        return false;
+        //    }
+        //}
     }
 
     //public enum NightmareClass { Physical, Demonic, Pyro }
