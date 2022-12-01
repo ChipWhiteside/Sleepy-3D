@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Silence {
     
-    [CreateAssetMenu(fileName = "New Basic Enemy Brain", menuName = "Basic Enemy Brain")]
+    [CreateAssetMenu(fileName = "New Quick Enemy Brain", menuName = "Quick Enemy Brain")]
     public class QuickEnemyBrain : EnemyBrain
     {
         //new EnemyBrainStates currentState = EnemyBrainStates.ChaseSleepy;

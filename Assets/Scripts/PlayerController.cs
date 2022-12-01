@@ -66,7 +66,7 @@ namespace Silence
 
         public void Use()
         {
-            Debug.Log("Used " + PlayerInventory.instance.selectedItem.name);
+            //Debug.Log("Used " + PlayerInventory.instance.selectedItem.name);
 
 
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -74,7 +74,7 @@ namespace Silence
             hits = Physics.RaycastAll(ray);
             foreach (RaycastHit hit in hits)
             {
-                Debug.Log("Clicked object: " + hit.collider.gameObject.name);
+                //Debug.Log("Clicked object: " + hit.collider.gameObject.name);
                 if (hit.collider.gameObject.tag == "Nightmare")
                 {
                     NightmareClicked(hit.collider.gameObject);

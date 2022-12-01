@@ -50,7 +50,7 @@ namespace Silence
 
         public void LoadStars()
         {
-            Debug.Log("xIR: " + xIterationsRight);
+            //Debug.Log("xIR: " + xIterationsRight);
 
             //Vector3 leftP = MainCamera.ScreenToWorldPoint(new Vector3(0, MainCamera.pixelHeight, 10));
             //Vector3 rightP = MainCamera.ScreenToWorldPoint(new Vector3(MainCamera.pixelWidth, MainCamera.pixelHeight, 10));

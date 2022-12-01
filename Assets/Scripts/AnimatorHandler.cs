@@ -27,7 +27,7 @@ namespace Silence {
 
         private void Start()
         {
-            UnityEngine.Debug.Log("V: " + vertical + ", H: " + horizontal);
+            //UnityEngine.Debug.Log("V: " + vertical + ", H: " + horizontal);
         }
 
         private void Update()

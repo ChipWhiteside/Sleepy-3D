@@ -114,11 +114,11 @@ namespace Silence
 
         private void OnTriggerEnter(Collider collision)
         {
-            Debug.Log("Hit collider:" + collision.name + " (Tag: "+ collision.tag+")");
+            //Debug.Log("Hit collider:" + collision.name + " (Tag: "+ collision.tag+")");
 
             if (collision.tag == "Sleepy")
             {
-                Debug.Log(name + " hit Sleepy");
+                //Debug.Log(name + " hit Sleepy");
                 HauntSleepy();
 
                 GameObject.Destroy(gameObject);
