@@ -21,6 +21,9 @@ namespace Silence
         public ItemSlot PhysicalItem;
         public ItemSlot DemonicItem;
 
+        public UIArrow left;
+        public UIArrow right;
+
         public ItemSlot selectedItemSlot;
         public Item selectedItem
         {
@@ -38,14 +41,21 @@ namespace Silence
             instance = this;
         }
 
+        private void Start()
+        {
+            PhysicalItem.Select();
+        }
+
         public void ToggleLeft()
         {
             SelectItem(selectedItemSlot.left);
+            left.Shrink();
         }
 
         public void ToggleRight()
         {
             SelectItem(selectedItemSlot.right);
+            right.Shrink();
         }
 
         public void SelectItem(ItemSlot itemSlot)

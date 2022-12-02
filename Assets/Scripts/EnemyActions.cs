@@ -14,7 +14,7 @@ namespace Silence
         {
             Vector3 targetPosition = Vector3.MoveTowards(nightmare.transform.position, Sleepy.position, nightmare.nightmareObj.speed * Time.deltaTime);
             Vector3 direction = (Sleepy.position - nightmare.transform.position).normalized;
-            Debug.DrawLine(nightmare.transform.position, direction, Color.white);
+            Debug.DrawLine(nightmare.transform.position, nightmare.transform.position + direction, Color.white);
 
             nightmare.UpdateAnimatorValues(direction.y, direction.x);
 
@@ -22,29 +22,46 @@ namespace Silence
             if (avoidPlayer && Vector3.Distance(targetPosition, Player.transform.position) < 3)
             {
 
-                Vector3 oppositeDirection = 1 * (nightmare.transform.position - Player.position).normalized; //Vector3.MoveTowards(nightmare.transform.position, Player.position, nightmare.nightmareObj.speed * Time.deltaTime);
-                
-                Vector3.Angle(direction, oppositeDirection);
-                Debug.DrawLine(oppositeDirection, nightmare.transform.position, Color.red);
-                //Vector3 clockwiseNintyDegrees = new Vector3(targetPosition.y, -targetPosition.x, 0.0f);
-                //Vector3 counterClockwiseNintyDegrees = new Vector3(targetPosition.y, targetPosition.x, 0.0f);
+                Vector3 oppositeDirection = -1 * (Player.position - nightmare.transform.position).normalized; //Vector3.MoveTowards(nightmare.transform.position, Player.position, nightmare.nightmareObj.speed * Time.deltaTime);
+
+                // Constrain to max of 90 degrees either direction
+                Vector3 clockwiseNintyDegrees = new Vector3(direction.y, -direction.x, 0.0f);
+                Vector3 counterClockwiseNintyDegrees = -1 * clockwiseNintyDegrees;
+                Debug.DrawLine(nightmare.transform.position, nightmare.transform.position + clockwiseNintyDegrees, Color.cyan);
+                Debug.DrawLine(nightmare.transform.position, nightmare.transform.position + counterClockwiseNintyDegrees, Color.green);
+
+                //Find closest between projected and both 90d vectors
+                float d1 = Vector3.Distance(clockwiseNintyDegrees, oppositeDirection);
+                float d2 = Vector3.Distance(counterClockwiseNintyDegrees, oppositeDirection);
+                Vector3 chosen90DVector = d1 < d2 ? clockwiseNintyDegrees : counterClockwiseNintyDegrees;
+
+                // Find whether closer 90d or projected V is closer to target and take that one
+                float d3 = Vector3.Distance(chosen90DVector, Sleepy.position);
+                float d4 = Vector3.Distance(oppositeDirection, Sleepy.position);
+                Vector3 chosenOppositeVector = d3 < d4 ? chosen90DVector : oppositeDirection;
+
+                //Vector3.Angle(direction, oppositeDirection);
+                Debug.DrawLine(nightmare.transform.position, nightmare.transform.position + chosenOppositeVector, Color.red);
 
                 // Check which 
-                // If avg vector is closer to
+                // If avg vector is closer to 0, take more of the opposite direction
 
                 float avgX = (direction.x + oppositeDirection.x) / 2;
                 float avgY = (direction.y + oppositeDirection.y) / 2;
+                float percentage = Mathf.Abs(1 - (Mathf.Abs(avgX) + Mathf.Abs(avgY)));
+                Debug.LogFormat("avgX: {0}, avgY: {1}, %: {2}", avgX, avgY, percentage);
                 //Vector3.MoveTowards(nightmare.transform.position, Player.position, nightmare.nightmareObj.speed * Time.deltaTime);
 
-                Vector3 newAvgVector = new Vector3(avgX, avgY, 0.0f);
-                Debug.DrawLine(nightmare.transform.position, newAvgVector, Color.yellow);
+                float adjustedAvgX = ((direction.x * (1 - percentage)) + (chosenOppositeVector.x * percentage)); // /2;
+                float adjustedAvgY = ((direction.y * (1 - percentage)) + (chosenOppositeVector.y * percentage)); // /2;
+                Debug.LogFormat("adjAvgX: {0}, adjAvgY: {1}, p: {2}", adjustedAvgX, adjustedAvgY, percentage);
 
-                Vector3 newAvgDirection = Vector3.MoveTowards(nightmare.transform.position, newAvgVector, nightmare.nightmareObj.speed * Time.deltaTime);
-                nightmare.transform.position = newAvgDirection;
+                Vector3 newAdjustedAvgDirection = new Vector3(adjustedAvgX, adjustedAvgY, 0.0f).normalized;
 
-                Debug.Break();
-                //PathAroundPlayer(nightmare);
-                //nightmare.transform.rotation.Set(0, 0, 0, 0);
+                Vector3 newAvgPosition = Vector3.MoveTowards(nightmare.transform.position, nightmare.transform.position + newAdjustedAvgDirection, nightmare.nightmareObj.speed * Time.deltaTime);
+                Debug.DrawLine(nightmare.transform.position, newAdjustedAvgDirection, Color.yellow);
+
+                nightmare.transform.position = newAvgPosition;
             }
             else
             {
