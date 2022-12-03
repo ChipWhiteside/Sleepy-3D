@@ -49,12 +49,12 @@ namespace Silence
                 float avgX = (direction.x + oppositeDirection.x) / 2;
                 float avgY = (direction.y + oppositeDirection.y) / 2;
                 float percentage = Mathf.Abs(1 - (Mathf.Abs(avgX) + Mathf.Abs(avgY)));
-                Debug.LogFormat("avgX: {0}, avgY: {1}, %: {2}", avgX, avgY, percentage);
+                //Debug.LogFormat("avgX: {0}, avgY: {1}, %: {2}", avgX, avgY, percentage);
                 //Vector3.MoveTowards(nightmare.transform.position, Player.position, nightmare.nightmareObj.speed * Time.deltaTime);
 
                 float adjustedAvgX = ((direction.x * (1 - percentage)) + (chosenOppositeVector.x * percentage)); // /2;
                 float adjustedAvgY = ((direction.y * (1 - percentage)) + (chosenOppositeVector.y * percentage)); // /2;
-                Debug.LogFormat("adjAvgX: {0}, adjAvgY: {1}, p: {2}", adjustedAvgX, adjustedAvgY, percentage);
+                //Debug.LogFormat("adjAvgX: {0}, adjAvgY: {1}, p: {2}", adjustedAvgX, adjustedAvgY, percentage);
 
                 Vector3 newAdjustedAvgDirection = new Vector3(adjustedAvgX, adjustedAvgY, 0.0f).normalized;
 
@@ -87,7 +87,7 @@ namespace Silence
              */
 
             // If nightmare moves left and is facing right OR moves right and is facing left, flip
-            if ((direction.x < 0 && nightmare.facingRight) || (direction.x > 0 && !nightmare.facingRight))
+            if ((direction.x < 0 && nightmare._FacingRight) || (direction.x > 0 && !nightmare._FacingRight))
             {
                 nightmare.Flip();
             }

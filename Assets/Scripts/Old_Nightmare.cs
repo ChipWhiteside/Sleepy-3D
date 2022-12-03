@@ -8,7 +8,7 @@ namespace Silence
     [RequireComponent(typeof(Animator))]
     public class Old_Nightmare : MonoBehaviour
     {
-        public NightmareObject nightmareObj;
+        public NightmareVariant nightmareObj;
         public Transform sleepy;
         public float speed;
 
@@ -20,7 +20,7 @@ namespace Silence
             sr = GetComponent<SpriteRenderer>();
             anim = GetComponent<Animator>();
 
-            sr.sprite = nightmareObj.icon;
+            //sr.sprite = nightmareObj.icon;
             //anim.animation = nightmareObj.anim;
         }
 

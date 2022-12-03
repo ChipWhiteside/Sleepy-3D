@@ -9,14 +9,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d63c7933ec173491f8527d49fc50974c, type: 3}
-  m_Name: Demon
+  m_Script: {fileID: 11500000, guid: 1e3c7696f89f4c045a3baa6b017ba384, type: 3}
+  m_Name: Quick Demon
   m_EditorClassIdentifier: 
-  name: Demon
-  icon: {fileID: 524107740, guid: ddceaf39b847d32469c3659ec38b5fa1, type: 3}
+  name: Quick Demon
   animController: {fileID: 9100000, guid: 3b3c5c8d7a9981944a7e97fd9b027553, type: 2}
-  enemyBrain: {fileID: 11400000, guid: ecf3ccaeb8149c5468e0da2fd2e012b3, type: 2}
+  enemyBrain: {fileID: 11400000, guid: 44705b84ea45f7b43b9f64a3e9291098, type: 2}
   nclass: 1
+  timeMultiplyer: 0.005
+  animatorMultiplyer: 2
   health: 1
-  speed: 1
+  speed: 2
   damage: 1

@@ -9,14 +9,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d63c7933ec173491f8527d49fc50974c, type: 3}
-  m_Name: Ghost
+  m_Script: {fileID: 11500000, guid: 1e3c7696f89f4c045a3baa6b017ba384, type: 3}
+  m_Name: Demon
   m_EditorClassIdentifier: 
-  name: Ghost
-  icon: {fileID: 1464945377, guid: 9255e1d3c53677a47a9f154214fa2531, type: 3}
-  animController: {fileID: 9100000, guid: 1e972142a444dc348a4ada92547863a9, type: 2}
+  name: Demon
+  animController: {fileID: 9100000, guid: 3b3c5c8d7a9981944a7e97fd9b027553, type: 2}
   enemyBrain: {fileID: 11400000, guid: ecf3ccaeb8149c5468e0da2fd2e012b3, type: 2}
-  nclass: 2
+  nclass: 1
+  timeMultiplyer: 0.005
+  animatorMultiplyer: 1
   health: 1
   speed: 1
   damage: 1

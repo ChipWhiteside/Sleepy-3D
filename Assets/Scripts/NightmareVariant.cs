@@ -3,19 +3,23 @@ using UnityEngine;
 
 namespace Silence
 {
-    [CreateAssetMenu(fileName = "New Nightmare", menuName = "Nightmare")]
-    public class NightmareObject : ScriptableObject
+    [CreateAssetMenu(fileName = "New Nightmare Variant", menuName = "Nightmare Variant")]
+    public class NightmareVariant : ScriptableObject
     {
         new public string name = "New Item";
 
-        public Sprite icon = null;
-        public AnimatorController animController = null;
+        //public Sprite icon = null;
+        //public AnimatorController animController = null;
         public EnemyBrain enemyBrain;
-        
-        public NightmareClass nclass;
+        public NightmareType nightmareType;
+
+        //public NightmareClass nclass;
+
+        public float timeMultiplyer = 0.005f;
+        public float animatorMultiplyer = 1.25f;
 
         public float health = 1;
-        public float speed = 2;
+        public float speed = 1;
         public float damage = 1;
 
         //public void HauntSleepy()

@@ -8,30 +8,32 @@ namespace Silence
 {
     public class Nightmare : MonoBehaviour
     {
-        public Transform Sleepy;
-        public NightmareClass nightmareClass;
         public Transform ChildSprite;
-
-        public NightmareObject nightmareObj;
+        public Transform Sleepy;
+        public NightmareVariant nightmareObj;
 
         // Eventually change this to a queue or stack of nightmareClasses so Json can be wearing a ghost sheet (thus is a ghost class THEN a physical class)
-
-        [SerializeField]
-        private float health = 1.0f; // Health starts at a base and increases based on time
-        [SerializeField]
-        private float speed = 1.0f; // Speed starts at a base and increases based on time
-        [SerializeField]
-        private float damage = 1.0f; // Damage starts at a base and increases based on time
+        [HideInInspector]
+        public NightmareClass nightmareClass;
 
         [HideInInspector]
         public float _Health { get { return health; } set { health = value; } }
+        private float health = 1.0f; // Health starts at a base and increases based on time
+
         [HideInInspector]
         public float _Speed { get { return speed; } set { speed = value; } }
+        private float speed = 1.0f; // Speed starts at a base and increases based on time
+
         [HideInInspector]
         public float _Damage { get { return damage; } set { damage = value; } }
+        private float damage = 1.0f; // Damage starts at a base and increases based on time
+
 
         private Animator childAnimator;
-        public bool facingRight = true;  // For determining which way the player is currently facing.
+        
+        [HideInInspector]
+        public bool _FacingRight { get { return facingRight; } set { facingRight = value; } }
+        private bool facingRight = true;  // For determining which way the player is currently facing.
 
         private int vertical;
         private int horizontal;
@@ -45,11 +47,12 @@ namespace Silence
         {
             // gameTime increases the health and speed of nightmares. Potentially even the damage.
             childAnimator = GetComponentInChildren<Animator>();
-            childAnimator.runtimeAnimatorController = nightmareObj.animController;
-            nightmareClass = nightmareObj.nclass;
-            health = nightmareObj.health;
-            speed = nightmareObj.speed;
-            damage = nightmareObj.damage;
+            childAnimator.runtimeAnimatorController = nightmareObj.nightmareType.nightmareController;
+            childAnimator.speed = nightmareObj.animatorMultiplyer;
+            nightmareClass = nightmareObj.nightmareType.nightmareClass;
+            health = nightmareObj.health + (GameManager.instance.gameTime * nightmareObj.timeMultiplyer);
+            speed = nightmareObj.speed + (GameManager.instance.gameTime * nightmareObj.timeMultiplyer);
+            damage = nightmareObj.damage; // Damage stays constant, only speed and health increase based on time
         }
 
         private void Awake()

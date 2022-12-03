@@ -9,14 +9,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d63c7933ec173491f8527d49fc50974c, type: 3}
+  m_Script: {fileID: 11500000, guid: 1e3c7696f89f4c045a3baa6b017ba384, type: 3}
   m_Name: Json
   m_EditorClassIdentifier: 
   name: Json
-  icon: {fileID: -1799520205, guid: 267073fbacd18ff44ad68b8f810f95c1, type: 3}
   animController: {fileID: 9100000, guid: a3df97cb8b6a6df498952579ef5024ae, type: 2}
   enemyBrain: {fileID: 11400000, guid: ecf3ccaeb8149c5468e0da2fd2e012b3, type: 2}
   nclass: 0
+  timeMultiplyer: 0.005
+  animatorMultiplyer: 1
   health: 1
   speed: 1
   damage: 1
