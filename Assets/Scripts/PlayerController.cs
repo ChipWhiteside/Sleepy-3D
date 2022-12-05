@@ -141,9 +141,9 @@ namespace Silence
             if (nightmaresClose.Contains(nightmare))
             {
                 Nightmare nightmareScript = nightmare.GetComponent<Nightmare>();
-                Debug.LogFormat("Nightmare of type ({0}) clicked with weapon type ({1})", nightmareScript.nightmareClass.ToString(), PlayerInventory.instance.selectedItem.nightmareClass.ToString());
+                Debug.LogFormat("Nightmare of type ({0}) clicked with weapon type ({1})", nightmareScript.nightmareClass.ToString(), InventoryManager.instance.selectedItem.nightmareClass.ToString());
 
-                if ((nightmareScript.nightmareClass).Equals(PlayerInventory.instance.selectedItem.nightmareClass))
+                if ((nightmareScript.nightmareClass).Equals(InventoryManager.instance.selectedItem.nightmareClass))
                 {
                     Debug.Log("Item matches nightmare type");
                     nightmareScript.Hit();

@@ -109,11 +109,11 @@ namespace Silence {
             }
             if (q_Input > 0)
             {
-                PlayerInventory.instance.ToggleLeft();
+                InventoryManager.instance.ToggleLeft();
             }
             if (e_Input > 0)
             {
-                PlayerInventory.instance.ToggleRight();
+                InventoryManager.instance.ToggleRight();
             }
         }
 

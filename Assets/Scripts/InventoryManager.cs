@@ -6,9 +6,9 @@ using UnityEngine.UI;
 
 namespace Silence
 {
-    public class PlayerInventory : MonoBehaviour
+    public class InventoryManager : MonoBehaviour
     {
-        public static PlayerInventory instance;
+        public static InventoryManager instance;
 
         public List<Item> allItems = new List<Item>();
         public Item[] inventory = new Item[3];
@@ -17,20 +17,32 @@ namespace Silence
         public Button LeftArrow;
         public Button RightArrow;
 
-        public ItemSlot GhostItem;
-        public ItemSlot PhysicalItem;
-        public ItemSlot DemonicItem;
+        public ItemSlot GhostSlot;
+        public ItemSlot PhysicalSlot;
+        public ItemSlot DemonicSlot;
 
         public UIArrow left;
         public UIArrow right;
 
+        [Range(0, 10f)]
+        public float timeToReachTarget = 0.05f;
+
         public ItemSlot selectedItemSlot;
+        [HideInInspector]
         public Item selectedItem
         {
             get { return selectedItemSlot.item; }
         }
 
-        public int selectedItemIndex;
+        [HideInInspector] public Vector3 leftSlotAnchor = new Vector3(0, 0.5f, 0);
+        [HideInInspector] public Vector3 centerSlotAnchor = new Vector3(0.5f, 0.5f, 0);
+        [HideInInspector] public Vector3 rightSlotAnchor = new Vector3(1, 0.5f, 0);
+
+        [HideInInspector] public Vector3 smallSlotSize = new Vector3(75, 75, 0);
+        [HideInInspector] public Vector3 largeSlotSize = new Vector3(100, 100, 0);
+
+        [HideInInspector] public Vector3 smallIconSize = new Vector3(45, 45, 0);
+        [HideInInspector] public Vector3 largeIconSize = new Vector3(65, 65, 0);
 
         void Awake()
         {
@@ -43,7 +55,7 @@ namespace Silence
 
         private void Start()
         {
-            PhysicalItem.Select();
+            PhysicalSlot.Select();
         }
 
         public void ToggleLeft()
