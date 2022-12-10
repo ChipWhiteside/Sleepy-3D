@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1024956163}
   - component: {fileID: 1024956165}
   - component: {fileID: 1024956164}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -53,7 +53,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: e013a8d3f84c2be4881269ed13a2e9a3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -117,7 +117,7 @@ GameObject:
   - component: {fileID: 1272768143}
   - component: {fileID: 1272768142}
   - component: {fileID: 1272768141}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Sphere
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -212,7 +212,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1479342412794002836}
   - component: {fileID: 1479342412794002837}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Hit Area
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -279,8 +279,7 @@ GameObject:
   - component: {fileID: 367341474}
   - component: {fileID: 367341475}
   - component: {fileID: 367341476}
-  - component: {fileID: 367341480}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -346,7 +345,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 2
+  m_Radius: 3
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &367341474
 MonoBehaviour:
@@ -395,31 +394,6 @@ MonoBehaviour:
   ChildSprite: {fileID: 1024956163}
   moveSpeed: 10
   nightmareDefeated: 0
---- !u!114 &367341480
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1479342413418847104}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e448540db2832e846b1cf8b068016c38, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  allItems:
-  - {fileID: 11400000, guid: c29e5e3834ff141478a5884e73ae367a, type: 2}
-  - {fileID: 11400000, guid: 8a32e4555e7b54782bee10300ae33f33, type: 2}
-  - {fileID: 11400000, guid: 60677657140614c429a95699e29bb67e, type: 2}
-  inventory:
-  - {fileID: 11400000, guid: c29e5e3834ff141478a5884e73ae367a, type: 2}
-  - {fileID: 11400000, guid: 8a32e4555e7b54782bee10300ae33f33, type: 2}
-  - {fileID: 11400000, guid: 60677657140614c429a95699e29bb67e, type: 2}
-  GhostItem: {fileID: 0}
-  PhysicalItem: {fileID: 0}
-  DemonicItem: {fileID: 0}
-  selectedItemSlot: {fileID: 0}
-  selectedItemIndex: 0
 --- !u!1 &1479342414113758186
 GameObject:
   m_ObjectHideFlags: 0
@@ -447,7 +421,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1479342414113758186}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -10}
+  m_LocalPosition: {x: 0, y: 0, z: -15}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

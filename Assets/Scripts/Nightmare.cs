@@ -1,8 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Unity.VisualScripting;
 using UnityEditor.Animations;
 using UnityEngine;
+using UnityEngine.InputSystem.HID;
 
 namespace Silence
 {
@@ -29,7 +31,7 @@ namespace Silence
         private float damage = 1.0f; // Damage starts at a base and increases based on time
 
 
-        private Animator childAnimator;
+        private Animator[] childrenAnimators;
         
         [HideInInspector]
         public bool _FacingRight { get { return facingRight; } set { facingRight = value; } }
@@ -46,9 +48,14 @@ namespace Silence
         public void SetupNightmareFromObj()
         {
             // gameTime increases the health and speed of nightmares. Potentially even the damage.
-            childAnimator = GetComponentInChildren<Animator>();
-            childAnimator.runtimeAnimatorController = nightmareObj.nightmareType.nightmareController;
-            childAnimator.speed = nightmareObj.animatorMultiplyer;
+            childrenAnimators = GetComponentsInChildren<Animator>(true);
+            Debug.Log("Child animator: " + childrenAnimators.Length);
+            foreach (var child in childrenAnimators)
+            {
+                Debug.Log("Animator name: " + child.gameObject.name);
+                child.runtimeAnimatorController = nightmareObj.nightmareType.nightmareController;
+                child.speed = nightmareObj.animatorMultiplyer;
+            }
             nightmareClass = nightmareObj.nightmareType.nightmareClass;
             health = nightmareObj.health + (GameManager.instance.gameTime * nightmareObj.timeMultiplyer);
             speed = nightmareObj.speed + (GameManager.instance.gameTime * nightmareObj.timeMultiplyer);
@@ -89,8 +96,11 @@ namespace Silence
             }
             #endregion
 
-            childAnimator.SetFloat(vertical, v, 0.1f, Time.deltaTime);
-            childAnimator.SetFloat(horizontal, h, 0.1f, Time.deltaTime);
+            foreach (var child in childrenAnimators)
+            {
+                child.SetFloat(vertical, v, 0.1f, Time.deltaTime);
+                child.SetFloat(horizontal, h, 0.1f, Time.deltaTime);
+            }
         }
 
         private void FixedUpdate()

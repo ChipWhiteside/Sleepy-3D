@@ -40,7 +40,7 @@ namespace Silence
         public List<NightmareType> nightmareTypes;
 
         private GamePhase currentPhase;
-        GamePhase easy = new GamePhase(new Vector4(1.0f, 5.0f, 10000000.0f, 60.0f), null);
+        GamePhase easy = new GamePhase(new Vector4(3.0f, 10.0f, 10000000.0f, 60.0f), null);
         Vector4 spawnTimers = Vector4.zero;
 
         //public NightmareObject demonObj;
@@ -142,7 +142,7 @@ namespace Silence
 
         void SpawnNightmare(NightmareVariant variant)
         {
-            Debug.Log("Spawned " + variant.name);
+            //Debug.Log("Spawned " + variant.name);
 
             nightmares++;
 

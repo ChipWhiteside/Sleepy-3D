@@ -12,6 +12,7 @@ namespace Silence
         public Transform ChildSprite;
         public float moveSpeed;
         public int nightmareDefeated;
+        public float range = 3.0f;
 
         private InputHandler inputHandler;
         private PlayerInputActions actions;
@@ -74,7 +75,7 @@ namespace Silence
             hits = Physics.RaycastAll(ray);
             foreach (RaycastHit hit in hits)
             {
-                //Debug.Log("Clicked object: " + hit.collider.gameObject.name);
+                Debug.Log("Clicked object: " + hit.collider.gameObject.name);
                 if (hit.collider.gameObject.tag == "Nightmare")
                 {
                     NightmareClicked(hit.collider.gameObject);
