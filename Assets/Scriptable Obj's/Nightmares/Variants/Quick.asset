@@ -14,9 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Quick
   enemyBrain: {fileID: 11400000, guid: 44705b84ea45f7b43b9f64a3e9291098, type: 2}
-  nightmareType: {fileID: 11400000, guid: db1cf90535710634c921aa0755e864bc, type: 2}
+  nightmareType: {fileID: 11400000, guid: 05180ed8585946740b633569910298dd, type: 2}
   timeMultiplyer: 0.005
   animatorMultiplyer: 2
   health: 1
-  speed: 2
+  speed: 0.8
   damage: 1

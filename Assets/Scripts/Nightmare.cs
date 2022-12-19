@@ -11,6 +11,7 @@ namespace Silence
     public class Nightmare : MonoBehaviour
     {
         public Transform ChildSprite;
+        public Transform ChildOutline;
         public Transform Sleepy;
         public NightmareVariant nightmareObj;
 
@@ -49,10 +50,8 @@ namespace Silence
         {
             // gameTime increases the health and speed of nightmares. Potentially even the damage.
             childrenAnimators = GetComponentsInChildren<Animator>(true);
-            Debug.Log("Child animator: " + childrenAnimators.Length);
             foreach (var child in childrenAnimators)
             {
-                Debug.Log("Animator name: " + child.gameObject.name);
                 child.runtimeAnimatorController = nightmareObj.nightmareType.nightmareController;
                 child.speed = nightmareObj.animatorMultiplyer;
             }
@@ -147,6 +146,7 @@ namespace Silence
             Vector3 theScale = ChildSprite.localScale;
             theScale.x *= -1;
             ChildSprite.localScale = theScale;
+            ChildOutline.localScale = theScale;
         }
 
         public void HauntSleepy()

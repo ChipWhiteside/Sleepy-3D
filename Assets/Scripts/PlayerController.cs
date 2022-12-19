@@ -13,10 +13,13 @@ namespace Silence
         public float moveSpeed;
         public int nightmareDefeated;
         public float range = 3.0f;
+        [Range(0, 1)]
+        public float rangeIndicatorAlpha = 0.0f;
 
         private InputHandler inputHandler;
         private PlayerInputActions actions;
         private Rigidbody rb;
+        private SphereCollider sc;
 
         private bool facingRight = true;  // For determining which way the player is currently facing.
 
@@ -36,6 +39,16 @@ namespace Silence
         void Start()
         {
             rb = GetComponent<Rigidbody>();
+            sc = GetComponent<SphereCollider>();
+            sc.radius = range;
+        }
+
+        void Update()
+        {
+            if (rangeIndicatorAlpha > 0)
+            {
+                rangeIndicatorAlpha -= .05f * Time.deltaTime;
+            }
         }
 
         private void Flip()
@@ -67,7 +80,7 @@ namespace Silence
 
         public void Use()
         {
-            //Debug.Log("Used " + PlayerInventory.instance.selectedItem.name);
+            Debug.Log("USE");
 
 
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -152,6 +165,12 @@ namespace Silence
                 }
                 else
                     Debug.Log("Item DOES NOT match nightmare type");
+            }
+            else // nightmare not in range
+            {
+                Debug.Log("OUT OF RANGE");
+                if (rangeIndicatorAlpha <= 0.9f)
+                    rangeIndicatorAlpha += 0.1f;
             }
         }
     }

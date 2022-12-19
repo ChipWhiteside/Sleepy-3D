@@ -18,5 +18,5 @@ MonoBehaviour:
   timeMultiplyer: 0.005
   animatorMultiplyer: 0.75
   health: 4
-  speed: 0.5
+  speed: 0.3
   damage: 2
