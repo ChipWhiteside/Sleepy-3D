@@ -80,6 +80,15 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Scroll"",
+                    ""type"": ""Value"",
+                    ""id"": ""6fa69285-60fb-4f20-9282-a3ed88f9a9ef"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
                 }
             ],
             ""bindings"": [
@@ -225,6 +234,17 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                     ""action"": ""InventoryRight"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""75ec3a95-1070-4476-bdd2-9db7a4aca730"",
+                    ""path"": ""<Mouse>/scroll"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Scroll"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -284,6 +304,7 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
         m_Player_NumKeys = m_Player.FindAction("NumKeys", throwIfNotFound: true);
         m_Player_InventoryLeft = m_Player.FindAction("InventoryLeft", throwIfNotFound: true);
         m_Player_InventoryRight = m_Player.FindAction("InventoryRight", throwIfNotFound: true);
+        m_Player_Scroll = m_Player.FindAction("Scroll", throwIfNotFound: true);
         // Shop
         m_Shop = asset.FindActionMap("Shop", throwIfNotFound: true);
         m_Shop_Newaction = m_Shop.FindAction("New action", throwIfNotFound: true);
@@ -352,6 +373,7 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_NumKeys;
     private readonly InputAction m_Player_InventoryLeft;
     private readonly InputAction m_Player_InventoryRight;
+    private readonly InputAction m_Player_Scroll;
     public struct PlayerActions
     {
         private @PlayerInputActions m_Wrapper;
@@ -362,6 +384,7 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
         public InputAction @NumKeys => m_Wrapper.m_Player_NumKeys;
         public InputAction @InventoryLeft => m_Wrapper.m_Player_InventoryLeft;
         public InputAction @InventoryRight => m_Wrapper.m_Player_InventoryRight;
+        public InputAction @Scroll => m_Wrapper.m_Player_Scroll;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -389,6 +412,9 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                 @InventoryRight.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInventoryRight;
                 @InventoryRight.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInventoryRight;
                 @InventoryRight.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInventoryRight;
+                @Scroll.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnScroll;
+                @Scroll.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnScroll;
+                @Scroll.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnScroll;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -411,6 +437,9 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                 @InventoryRight.started += instance.OnInventoryRight;
                 @InventoryRight.performed += instance.OnInventoryRight;
                 @InventoryRight.canceled += instance.OnInventoryRight;
+                @Scroll.started += instance.OnScroll;
+                @Scroll.performed += instance.OnScroll;
+                @Scroll.canceled += instance.OnScroll;
             }
         }
     }
@@ -465,6 +494,7 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
         void OnNumKeys(InputAction.CallbackContext context);
         void OnInventoryLeft(InputAction.CallbackContext context);
         void OnInventoryRight(InputAction.CallbackContext context);
+        void OnScroll(InputAction.CallbackContext context);
     }
     public interface IShopActions
     {

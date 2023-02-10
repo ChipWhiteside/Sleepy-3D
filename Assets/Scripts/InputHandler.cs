@@ -18,6 +18,7 @@ namespace Silence {
         PlayerController playerController;
 
         Vector2 movementInput;
+        Vector2 scrollInput;
         [SerializeField]
         private float use_Input;
         [SerializeField]
@@ -45,6 +46,7 @@ namespace Silence {
             {
                 inputActions = new PlayerInputActions();
                 inputActions.Player.Movement.performed += inputActions => movementInput = inputActions.ReadValue<Vector2>();
+                inputActions.Player.Scroll.performed += inputActions => scrollInput = inputActions.ReadValue<Vector2>();
                 inputActions.Player.Use.performed += i => use_Input = i.ReadValue<float>();
                 inputActions.Player.Inventory.performed += i => inventory_Input = i.ReadValue<float>();
                 inputActions.Player.NumKeys.performed += i => numKey_Input = i.ReadValue<float>();
@@ -78,6 +80,7 @@ namespace Silence {
             numKey_Input = 0;
             q_Input = 0;
             e_Input = 0;
+            scrollInput = new Vector2(0, 0);
         }
 
         private void MoveInput(float delta)
@@ -107,11 +110,11 @@ namespace Silence {
             {
                 playerController.InventoryPressed();
             }
-            if (q_Input > 0)
+            if (q_Input > 0 || scrollInput.y > 0)
             {
                 InventoryManager.instance.ToggleLeft();
             }
-            if (e_Input > 0)
+            if (e_Input > 0 || scrollInput.y < 0)
             {
                 InventoryManager.instance.ToggleRight();
             }
